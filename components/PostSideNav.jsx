@@ -22,7 +22,7 @@ const PostSideNav = () => {
         <div className="border-b" />
         <BsPencilSquare />
       </div>
-      <div className="w-[3rem] h-[3rem] rounded-full bg-[black] overflow-hidden place-items-center">
+      <div className="w-[3rem] h-[3rem] grid  rounded-full bg-[black] overflow-hidden ">
         <Image className="object-cover" src={duck} alt="" />
       </div>
     </div>
