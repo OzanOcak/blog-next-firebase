@@ -38,24 +38,60 @@ const Recommendation = ({ author }) => {
 
       <div>
         <div className="my-[1rem] font-bold">More from Medium</div>
-        <div>
-          <div className="flex items-center gap-[.6rem]">
-            <div className="h-[1.3rem] w-[1.3rem] rounded-full overflow-hidden ">
-              <Image src={duck} alt="" height={100} width={100} />
+        {RecommendedPosts.map((post) => (
+          <div className="border-b mb-[.5rem]" key="">
+            <div className="flex items-center gap-[.6rem]">
+              <div className="h-[1.3rem] w-[1.3rem] rounded-full overflow-hidden ">
+                <Image
+                  src={post.author.image}
+                  alt=""
+                  height={100}
+                  width={100}
+                />
+              </div>
+              <div className="font-semibold mb-[.2rem] text-sm">
+                {post.author.name}
+              </div>
             </div>
-            <div className="font-semibold mb-[.2rem] text-sm">Donald Duck</div>
+            <div className="flex  justify-between">
+              <div className="flex flex-1 items-center font-bold lg:mb-[1rem]">
+                {post.title}
+              </div>
+              <div className="flex flex-1 items-center justify-center h-[3rem] w-[3rem]">
+                <Image src={post.image} width={80} height={80} alt="" />
+              </div>
+            </div>
           </div>
-          <div className="flex  justify-between">
-            <div className="flex flex-1 items-center font-bold">
-              Learn JavaScript with the hard way
-            </div>
-            <div className="flex flex-1 items-center justify-center h-[4rem] w-[4rem]">
-              <Image src={banner} width={100} height={100} alt="" />
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
 export default Recommendation;
+
+const RecommendedPosts = [
+  {
+    title: "What can you do with JAM stack?",
+    image: banner,
+    author: {
+      name: "Donald Duck",
+      image: duck,
+    },
+  },
+  {
+    title: "Is Node.js really good option for back-end?",
+    image: banner,
+    author: {
+      name: "Donald Duck",
+      image: duck,
+    },
+  },
+  {
+    title: "Why React is still future proof in 2022?",
+    image: banner,
+    author: {
+      name: "Donald Duck",
+      image: duck,
+    },
+  },
+];
