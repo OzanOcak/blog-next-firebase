@@ -1,8 +1,12 @@
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import PostCard from "../components/PostCard";
+import { useContext } from "react";
+import { BlogContext } from "../context/blogContext";
 
 export default function Home() {
+  const { posts } = useContext(BlogContext);
+  console.log(posts);
   return (
     <div>
       <Header />
