@@ -4,7 +4,8 @@ import { BlogContext } from "../context/blogContext";
 import logo from "../public/logo.png";
 
 const Header = () => {
-  const { handleUserAuth } = useContext(BlogContext);
+  const { currentUser, handleUserAuth } = useContext(BlogContext);
+  console.log("---------->", currentUser);
   return (
     <div className="flex justify-center p-5 gap-10 bg-[orange]">
       <div className="flex flex-1 max-w-7xl justify-between gap-10">
@@ -17,19 +18,36 @@ const Header = () => {
             width={200}
           />
         </div>
-        <div className="flex cursor-point items-center space-x-5">
-          <div>Our Story</div>
-          <div>Membership</div>
-          <div
-            onClick={handleUserAuth}
-            className="cursor-pointer  hover:text-[red]"
-          >
-            Sign In
+        {/**------------top nav right----------- */}
+        {currentUser ? (
+          <div className="flex cursor-point items-center space-x-5">
+            <div>Our Story</div>
+            <div>Membership</div>
+            <div
+              onClick={handleUserAuth}
+              className="cursor-pointer  hover:text-[red]"
+            >
+              Write
+            </div>
+            <div className="bg-[black] text-white py-2 px-4 rounded-[1.5rem]">
+              Get Unlimited Access
+            </div>
           </div>
-          <div className="bg-[black] text-white py-2 px-4 rounded-[1.5rem]">
-            Get Started
+        ) : (
+          <div className="flex cursor-point items-center space-x-5">
+            <div>Our Story</div>
+            <div>Membership</div>
+            <div
+              onClick={handleUserAuth}
+              className="cursor-pointer  hover:text-[red]"
+            >
+              Sign In
+            </div>
+            <div className="bg-[black] text-white py-2 px-4 rounded-[1.5rem]">
+              Get Started
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

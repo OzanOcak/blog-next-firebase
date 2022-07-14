@@ -71,7 +71,7 @@ const BlogProvider = ({ children }) => {
   };
 
   return (
-    <BlogContext.Provider value={{ posts, users, handleUserAuth }}>
+    <BlogContext.Provider value={{ posts, users, handleUserAuth, currentUser }}>
       {children}
     </BlogContext.Provider>
   );
