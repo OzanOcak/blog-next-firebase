@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
-import { db } from "../firebase";
+import { db, auth, provider } from "../firebase";
 import { collection, getDocs, setDoc, doc } from "firebase/firestore";
+import { signInWithPopup } from "firebase/auth";
 
 const BlogContext = createContext();
 
 const BlogProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -51,8 +53,25 @@ const BlogProvider = ({ children }) => {
     getPosts();
   }, []);
 
+  const addUserToFirebase = async (user) => {
+    await setDoc(doc(db, "users", user.email), {
+      email: user.email,
+      name: user.displayName,
+      imageUrl: user.photoURL,
+      followCount: 0,
+    });
+  };
+
+  const handleUserAuth = async () => {
+    const userData = await signInWithPopup(auth, provider);
+    const user = userData.user;
+    console.log(user);
+    setCurrentUser(user);
+    addUserToFirebase(user);
+  };
+
   return (
-    <BlogContext.Provider value={{ posts, users }}>
+    <BlogContext.Provider value={{ posts, users, handleUserAuth }}>
       {children}
     </BlogContext.Provider>
   );
